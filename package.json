@@ -58,7 +58,7 @@
     "diff": "^9.0.0",
     "google-auth-library": "^10.0.0",
     "lightweight-charts": "5.2.0",
-    "markdown-it": "^14.1.1",
+    "markdown-it": "^15.0.0",
     "markdown-it-footnote": "^4.0.0",
     "mermaid": "^11.14.0",
     "minisearch": "^7.2.0",
