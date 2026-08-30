@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.github
+.claude
+public/docs-bundle
+npm-debug.log*
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+.env*.local
+coverage
+test-results
+playwright-report

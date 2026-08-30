@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/heyphat/note/security/advisories/new
+    about: Report privately through GitHub. Please do not open a public issue.
+  - name: Question or idea
+    url: https://github.com/heyphat/note/discussions
+    about: For open-ended questions and discussion rather than a specific bug.

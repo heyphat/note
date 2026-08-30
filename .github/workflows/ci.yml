@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Both ends of the supported range in package.json#engines:
+        # 18 is the floor Next 14.2 requires, 24 is the pinned .nvmrc version.
+        node: ['18', '24']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+
+      # `prebuild` regenerates public/docs-bundle from docs/, so this also
+      # covers the docs bundler.
+      - run: npm run build

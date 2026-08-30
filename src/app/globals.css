@@ -1,0 +1,2848 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+:root[data-theme="dark"] {
+  --bg: #0b0f17;
+  --panel: #131a26;
+  --panel-2: #1a2332;
+  --border: #232e42;
+  --border-strong: #2e3b54;
+  --text: #e5ecf5;
+  --muted: #8a99b3;
+  --good: #22c55e;
+  --bad: #ef4444;
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --on-accent: #0b0f17;
+  --warn: #f59e0b;
+  --pill-buy-fg: #93c5fd;
+  --pill-buy-border: #1e3a8a;
+  --pill-buy-bg: rgba(30, 58, 138, .25);
+  --pill-sell-fg: #fca5a5;
+  --pill-sell-border: #7f1d1d;
+  --pill-sell-bg: rgba(127, 29, 29, .25);
+  --empty-cell-bg: rgba(255, 255, 255, .02);
+  --legend-no-trades: rgba(255, 255, 255, .10);
+  --color-scheme: dark;
+  /* JSON Canvas color presets ("1"–"6"). Picked to read well on dark
+     backgrounds; the light theme below overrides them with darker
+     equivalents so contrast survives the theme swap. */
+  --canvas-color-1: #ff6b6b;
+  --canvas-color-2: #ffa64d;
+  --canvas-color-3: #f7d154;
+  --canvas-color-4: #5cb85c;
+  --canvas-color-5: #4ec3ee;
+  --canvas-color-6: #a982f5;
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f8fb;
+  --panel: #ffffff;
+  --panel-2: #eef2f7;
+  --border: #d6deea;
+  --border-strong: #b6c2d4;
+  --text: #1a2332;
+  --muted: #5b6577;
+  --good: #15803d;
+  --bad: #b91c1c;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --on-accent: #ffffff;
+  --warn: #b45309;
+  --pill-buy-fg: #1d4ed8;
+  --pill-buy-border: #93c5fd;
+  --pill-buy-bg: rgba(37, 99, 235, .10);
+  --pill-sell-fg: #b91c1c;
+  --pill-sell-border: #fca5a5;
+  --pill-sell-bg: rgba(220, 38, 38, .10);
+  --empty-cell-bg: rgba(0, 0, 0, .03);
+  --legend-no-trades: rgba(0, 0, 0, .08);
+  --color-scheme: light;
+  --canvas-color-1: #e64545;
+  --canvas-color-2: #e07a1e;
+  --canvas-color-3: #c79e16;
+  --canvas-color-4: #2f9c2f;
+  --canvas-color-5: #1d92c3;
+  --canvas-color-6: #7f4ee0;
+}
+
+html {
+  color-scheme: var(--color-scheme);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+}
+
+@layer utilities {
+  .text-good {
+    color: var(--good);
+  }
+
+  .text-bad {
+    color: var(--bad);
+  }
+
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .text-accent {
+    color: var(--accent);
+  }
+
+  .text-text {
+    color: var(--text);
+  }
+
+  .bg-panel {
+    background: var(--panel);
+  }
+
+  .bg-panel-2 {
+    background: var(--panel-2);
+  }
+
+  .border-border {
+    border-color: var(--border);
+  }
+
+  .bg-accent {
+    background: var(--accent);
+  }
+
+  .border-accent {
+    border-color: var(--accent);
+  }
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.card-title {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.section-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+@layer components {
+  .th {
+    text-align: inherit;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+  }
+
+  .td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+}
+
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.pill.buy {
+  color: var(--pill-buy-fg);
+  border-color: var(--pill-buy-border);
+  background: var(--pill-buy-bg);
+}
+
+.pill.sell {
+  color: var(--pill-sell-fg);
+  border-color: var(--pill-sell-border);
+  background: var(--pill-sell-bg);
+}
+
+.input-date {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  color-scheme: var(--color-scheme);
+  font-family: inherit;
+}
+
+.pager-btn {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.6;
+  transition: background .08s ease;
+}
+
+.pager-btn:hover:not(:disabled) {
+  background: var(--border);
+}
+
+.pager-btn:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Global thin scrollbar — applies to the document and every nested scroller
+   so macOS "Always show" / mouse users don't get the fat classic scrollbar.
+   Uses --border-strong for enough contrast in both dark and light themes.
+   The thumb is transparent until the scroll container (or the thumb itself)
+   is hovered, so it fades out when not needed — close to macOS overlay feel
+   without giving up the custom thin styling. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+*:hover {
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background 200ms ease;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Calendar detail scroller keeps its slimmer 6px variant */
+.cal-detail-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.cal-detail-scroll::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+}
+
+/* Milkdown editor — styled to feel like https://milkdown.dev/playground:
+   roomy padding, comfortable reading-size typography, strong heading
+   hierarchy, and rich block styles for code, tables, images, math.
+   Colors are driven by the app's --bg/--panel/--text/etc. tokens via the
+   --crepe-color-* CSS variable bridge. */
+.milkdown-wrapper {
+  width: 100%;
+  /* Match the page bg so the narrow (focused-width) editor blends with
+     its surrounding pane instead of reading as a floating card. Elements
+     that still need to stand out (inline code, code blocks, tables,
+     slash menu) use --panel / --panel-2 further down in this file. */
+  background: var(--bg);
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 380px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Full-height variant for the notes page — fill container instead of
+   capping. Scrolling happens on the outer pane so the scrollbar sits
+   at the right edge of the whole editor pane, not inside the narrow
+   (focused-width) column. */
+.milkdown-wrapper.h-full {
+  max-height: none;
+  min-height: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* History/version previews live in a modal, so they should size to their
+   content instead of behaving like the full editor pane. */
+.milkdown-wrapper.history-preview {
+  background: transparent;
+  min-height: 0;
+  max-height: none;
+  height: auto;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.milkdown-wrapper.history-preview .milkdown {
+  background: transparent;
+}
+
+/* Typewriter padding: ::before gives room at the top so the first line can
+   scroll up to center even in a brand-new note; ::after gives room at the
+   bottom so the last line can scroll up to center. Without both, short docs
+   can't be centered and the caret snaps feel broken. */
+.milkdown-wrapper.h-full.typewriter-mode::before,
+.milkdown-wrapper.h-full.typewriter-mode::after {
+  content: "";
+  display: block;
+  height: var(--typewriter-end-slack, 0px);
+  pointer-events: none;
+}
+
+.milkdown-wrapper .milkdown {
+  --crepe-color-background: var(--bg);
+  --crepe-color-on-background: var(--text);
+  --crepe-color-surface: var(--bg);
+  --crepe-color-surface-low: var(--panel-2);
+  --crepe-color-on-surface: var(--text);
+  --crepe-color-on-surface-variant: var(--muted);
+  --crepe-color-outline: var(--border);
+  --crepe-color-primary: var(--accent);
+  --crepe-color-secondary: var(--panel-2);
+  --crepe-color-on-secondary: var(--text);
+  --crepe-color-hover: var(--panel-2);
+  --crepe-color-selected: color-mix(in srgb, var(--accent) 18%, transparent);
+  --crepe-color-inline-code: var(--warn);
+  --crepe-color-error: var(--bad);
+  --crepe-color-inline-area: var(--panel-2);
+  --crepe-font-title: var(--editor-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif);
+  --crepe-font-default: var(--editor-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif);
+  --crepe-font-code: 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror {
+  padding: 12px 40px 16px;
+  font-size: var(--editor-font-size, 16px);
+  line-height: var(--editor-line-height, 1.7);
+  min-height: 320px;
+  outline: none;
+}
+
+.milkdown-wrapper.history-preview .milkdown .ProseMirror {
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+.milkdown-wrapper.history-preview .milkdown .ProseMirror > :last-child {
+  margin-bottom: 0;
+}
+
+/* Crepe defaults the slash-menu and selection-toolbar icons to
+   --crepe-color-outline (border), which is too dim to read against the panel.
+   Lift them to the text color so the icon weight matches the label. */
+.milkdown-wrapper .milkdown .milkdown-slash-menu .menu-groups .menu-group li svg,
+.milkdown-wrapper .milkdown .milkdown-toolbar .toolbar-item svg {
+  color: var(--crepe-color-on-surface);
+  fill: var(--crepe-color-on-surface);
+}
+
+.milkdown-wrapper .milkdown .milkdown-template-hint {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  color: color-mix(in srgb, var(--crepe-color-on-background), transparent 60%);
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.milkdown-wrapper .milkdown .milkdown-template-hint-label {
+  font: inherit;
+  letter-spacing: inherit;
+  pointer-events: none;
+}
+
+.milkdown-wrapper .milkdown .milkdown-template-hint-button {
+  pointer-events: auto;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.milkdown-wrapper .milkdown .milkdown-template-hint-button:hover {
+  color: inherit;
+}
+
+.milkdown-wrapper .milkdown .milkdown-template-hint-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 14rem;
+  padding: 0.35rem 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  pointer-events: auto;
+  z-index: 40;
+}
+
+.milkdown-wrapper .milkdown .milkdown-template-hint-item {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0.45rem 0.8rem;
+  color: var(--text);
+  text-align: left;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.milkdown-wrapper .milkdown .milkdown-template-hint-item:hover {
+  background: var(--panel-2);
+}
+
+.milkdown-wrapper .milkdown .milkdown-template-hint-empty {
+  display: block;
+  padding: 0.45rem 0.8rem;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Virtual caret (I-beam). Crepe ties it to --crepe-color-outline, which we
+   map to --border — that's nearly invisible against --bg in both themes.
+   Override just the cursor variable with --accent for a visible caret
+   without recoloring every border/icon that uses --crepe-color-outline. */
+.milkdown-wrapper .milkdown .ProseMirror-focused {
+  --prosemirror-virtual-cursor-color: var(--accent);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .prosemirror-virtual-cursor,
+.milkdown-wrapper .milkdown .ProseMirror .prosemirror-virtual-cursor-left,
+.milkdown-wrapper .milkdown .ProseMirror .prosemirror-virtual-cursor-right {
+  border-left-width: 2.5px;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror p {
+  font-size: var(--editor-font-size, 16px);
+  line-height: var(--editor-line-height, 1.7);
+  padding: var(--editor-p-spacing, 4px) 0;
+  margin: 0;
+}
+
+/* Headings — margin-top only (no bottom) + tiny internal padding, matching
+   Crepe's built-in reset pattern. Keeps the selection highlight tight
+   around the text rather than a large padded rectangle. */
+.milkdown-wrapper .milkdown .ProseMirror h1 {
+  font-size: 32px;
+  line-height: 1.25;
+  margin: 0.8em 0 0;
+  padding: 2px 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror h2 {
+  font-size: 24px;
+  line-height: 1.3;
+  margin: 0.75em 0 0;
+  padding: 2px 0;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror h3 {
+  font-size: 20px;
+  line-height: 1.35;
+  margin: 0.7em 0 0;
+  padding: 2px 0;
+  font-weight: 600;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror h4 {
+  font-size: 17px;
+  line-height: 1.4;
+  margin: 0.6em 0 0;
+  padding: 2px 0;
+  font-weight: 600;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror h5,
+.milkdown-wrapper .milkdown .ProseMirror h6 {
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0.55em 0 0;
+  padding: 2px 0;
+  font-weight: 600;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror> :is(h1, h2, h3, h4, h5, h6):first-of-type {
+  margin-top: 0;
+}
+
+/* Lists */
+.milkdown-wrapper .milkdown .ProseMirror ul,
+.milkdown-wrapper .milkdown .ProseMirror ol {
+  padding-left: 28px;
+  margin: 0.5em 0;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror li {
+  margin: 0.25em 0;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror li>p {
+  margin: 0.15em 0;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror li::marker {
+  color: var(--text);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .milkdown-icon.label:is(.bullet, .ordered) {
+  color: var(--text);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .milkdown-icon.label:is(.bullet, .ordered) svg {
+  fill: currentColor;
+}
+
+/* Blockquote — left rule with subtle tint */
+.milkdown-wrapper .milkdown .ProseMirror blockquote {
+  margin: 1em 0;
+  padding: 0.4em 0 0.4em 16px;
+  border-left: 3px solid var(--border-strong);
+  color: var(--muted);
+  font-style: italic;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout {
+  --callout-accent: var(--accent);
+  margin: 1em 0;
+  padding: 12px 14px 12px 16px;
+  border: 1px solid color-mix(in srgb, var(--callout-accent) 35%, var(--border));
+  border-left: 4px solid var(--callout-accent);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--callout-accent) 12%, transparent), transparent 55%),
+    color-mix(in srgb, var(--panel) 86%, transparent);
+  color: var(--text);
+  font-style: normal;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 5%, transparent);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout-success {
+  --callout-accent: var(--good);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout-warning {
+  --callout-accent: var(--warn);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout-danger {
+  --callout-accent: var(--bad);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout-important,
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout-question {
+  --callout-accent: var(--accent-hover);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout-example,
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout-quote {
+  --callout-accent: var(--muted);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout>p {
+  margin: 0.35em 0;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout>.callout-title:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 0.45em;
+  color: var(--callout-accent);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.01em;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror blockquote.callout>.callout-title:first-child::before {
+  content: '';
+  width: 0.55em;
+  height: 0.55em;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: var(--callout-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--callout-accent) 16%, transparent);
+}
+
+/* Inline code */
+.milkdown-wrapper .milkdown .ProseMirror code {
+  font-family: var(--crepe-font-code);
+  font-size: 0.9em;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: var(--warn);
+}
+
+/* CodeMirror block */
+.milkdown-wrapper .milkdown .milkdown-code-block,
+.milkdown-wrapper .milkdown pre {
+  margin: 1em 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+}
+
+.milkdown-wrapper .milkdown .cm-editor {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.milkdown-wrapper .milkdown .cm-editor .cm-gutters {
+  background: var(--panel-2);
+  border-right: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.milkdown-wrapper .milkdown .cm-editor .cm-content {
+  padding: 12px 0;
+  color: var(--text);
+}
+
+.milkdown-wrapper .milkdown .cm-editor .cm-line {
+  color: var(--text);
+}
+
+.milkdown-wrapper .milkdown .price-chart-source-collapsed {
+  --price-chart-source-line-height: 20px;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block.price-chart-source-collapsed {
+  margin-bottom: 4px;
+}
+
+.milkdown-wrapper .milkdown .price-chart-source-collapsed .cm-line {
+  line-height: var(--price-chart-source-line-height);
+}
+
+.milkdown-wrapper .milkdown .price-chart-source-collapsed .cm-scroller {
+  max-height: calc(var(--price-chart-source-line-height) * 3 + 24px);
+  overflow-y: auto;
+}
+
+/* Tables */
+/* Milkdown renders tables inside a `.table-wrapper` div. Scroll that wrapper
+   horizontally when the table's natural column widths exceed the editor
+   column — otherwise, in focused-width / narrow mode, cells get squished
+   into each other and text from adjacent columns overlaps. */
+.milkdown-wrapper .milkdown .table-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.milkdown-wrapper .milkdown table {
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 14px;
+  /* width: auto + min-width: 100% — the table fills the wrapper when
+     content is narrow, but is free to grow beyond it (triggering the
+     wrapper's horizontal scroll) when columns need more room. */
+  width: auto;
+  min-width: 100%;
+}
+
+.milkdown-wrapper .milkdown th,
+.milkdown-wrapper .milkdown td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.milkdown-wrapper .milkdown th {
+  background: var(--panel-2);
+  font-weight: 600;
+}
+
+/* Image block */
+.milkdown-wrapper .milkdown .milkdown-image-block img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+/* Horizontal rule */
+.milkdown-wrapper .milkdown .ProseMirror hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 1.5em 0;
+}
+
+/* Links */
+.milkdown-wrapper .milkdown .ProseMirror a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror a:hover {
+  color: var(--accent-hover);
+}
+
+/* --- Task lists --- Crepe's list-item component renders a <span.milkdown-icon>
+   with class "checked" / "unchecked" inside .label-wrapper. We just dim and
+   strike-through the content when the item is checked. */
+.milkdown-wrapper .milkdown .ProseMirror .list-item:has(> .label-wrapper .milkdown-icon.checked)>.children {
+  opacity: 0.55;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .label-wrapper {
+  cursor: pointer;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .milkdown-icon.checked {
+  color: var(--good);
+}
+
+/* --- Focus mode --- render a block-level overlay that follows Milkdown's
+   hovered/selected block shape, including wrapped paragraphs and list-item
+   blocks. Hovered block wins; text selection is the fallback. */
+.milkdown-root {
+  position: relative;
+}
+
+.milkdown-root .focus-overlay-layer {
+  position: absolute;
+  pointer-events: none;
+  z-index: 6;
+  transition: top 0.14s ease, height 0.14s ease, opacity 0.18s ease;
+}
+
+.milkdown-root.focus-mode .focus-overlay-layer[data-focus-overlay-layer="top"],
+.milkdown-root.focus-mode .focus-overlay-layer[data-focus-overlay-layer="bottom"] {
+  /* Dim, don't obscure. 55% restores a clear separation between
+     the active block and the rest of the editor without blanketing
+     structural styling entirely. */
+  background: color-mix(in srgb, var(--crepe-color-background, var(--bg)) 75%, transparent);
+  backdrop-filter: saturate(0.6) blur(0.4px);
+}
+
+.milkdown-root.focus-mode .focus-overlay-layer[data-focus-overlay-layer="focus"] {
+  background: color-mix(in srgb, var(--crepe-color-selected), transparent 55%);
+  border-radius: 10px;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--crepe-color-selected), transparent 15%),
+    inset 0 -1px 0 color-mix(in srgb, var(--crepe-color-selected), transparent 15%);
+}
+
+.milkdown-root .milkdown-block-handle {
+  z-index: 8;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .ai-edit-flash {
+  border-radius: 6px;
+  animation: ai-edit-flash 1800ms ease-out;
+}
+
+@keyframes ai-edit-flash {
+  0%,
+  18% {
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent) inset;
+  }
+  100% {
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+/* --- Zen mode --- Full-bleed editor with hidden chrome. Applied on
+   <body> by page.tsx so overlays and portals outside the main tree also
+   pick up the style. */
+body[data-zen="true"] .zen-hide {
+  display: none !important;
+}
+
+body[data-zen="true"] .milkdown-wrapper {
+  max-height: none;
+}
+
+body[data-zen="true"] .zen-exit {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 60;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+
+body[data-zen="true"] .zen-exit:hover {
+  opacity: 1;
+  color: var(--text);
+}
+
+body:not([data-zen="true"]) .zen-exit {
+  display: none;
+}
+
+/* --- Footnotes --- GFM preset renders references as
+   <sup data-type="footnote_reference" data-label="1">1</sup>
+   and definitions as <dl data-type="footnote_definition">. The click handler
+   in editor-enhancements.ts scrolls the matching dl into view and adds the
+   .footnote-flash class for a brief highlight. */
+.milkdown-wrapper .milkdown .ProseMirror sup[data-type="footnote_reference"] {
+  color: var(--accent);
+  font-weight: 600;
+  padding: 0 2px;
+  cursor: pointer;
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: super;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror sup[data-type="footnote_reference"]:hover {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror sup[data-type="footnote_reference"]::before {
+  content: '[';
+}
+
+.milkdown-wrapper .milkdown .ProseMirror sup[data-type="footnote_reference"]::after {
+  content: ']';
+}
+
+.milkdown-wrapper .milkdown .ProseMirror dl[data-type="footnote_definition"] {
+  margin: 1em 0;
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.9em;
+  color: var(--muted);
+  transition: background 0.3s ease;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 12px;
+  align-items: start;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror dl[data-type="footnote_definition"] dt {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.85em;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror dl[data-type="footnote_definition"] dd {
+  margin: 0;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror dl.footnote-flash {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* --- Mermaid preview --- Rendered by src/lib/mermaid-render.ts, appended
+   as a child of .milkdown-code-block when the language is `mermaid`. The
+   preview is contenteditable=false so ProseMirror / CodeMirror don't touch
+   it, but MutationObserver will still see child adds — that's expected and
+   debounced. */
+.milkdown-wrapper .milkdown .milkdown-code-block .mermaid-preview {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .mermaid-preview svg {
+  max-width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .mermaid-preview .mermaid-error {
+  color: var(--bad);
+  font-family: var(--crepe-font-code);
+  font-size: 12px;
+  white-space: pre-wrap;
+  padding: 4px 0;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .mermaid-preview .mermaid-empty {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* --- Excalidraw preview --- Rendered by src/lib/excalidraw-render.ts from
+   Excalidraw scene JSON code blocks. */
+.milkdown-wrapper .milkdown .milkdown-code-block .excalidraw-preview {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .excalidraw-preview svg {
+  max-width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .excalidraw-preview .excalidraw-error {
+  color: var(--bad);
+  font-family: var(--crepe-font-code);
+  font-size: 12px;
+  white-space: pre-wrap;
+  padding: 4px 0;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .excalidraw-preview .excalidraw-empty {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* --- Canvas preview --- Rendered by src/lib/canvas-render.ts. JSON Canvas
+   spec (jsoncanvas.org) inside a `canvas` fenced code block becomes an
+   interactive React Flow surface that writes edits back into the fence. */
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview {
+  position: relative;
+  height: 520px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  color: var(--bad);
+  font-family: var(--crepe-font-code);
+  font-size: 12px;
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-toolbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* `:not(.canvas-color-swatch)` keeps these generic-button defaults from
+   clobbering the color picker's background + border (which carry the
+   actual swatch color and rim). */
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-toolbar button:not(.canvas-color-swatch) {
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  background: transparent;
+  color: var(--text);
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-toolbar button:not(.canvas-color-swatch):hover {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-toolbar .canvas-toolbar-delete {
+  color: var(--bad);
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-toolbar .canvas-toolbar-expand {
+  margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  color: var(--muted);
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-toolbar .canvas-toolbar-expand:hover {
+  color: var(--text);
+}
+
+/* Collapse the JSON source for canvas blocks to ~2 visible rows so the
+   interactive surface is the dominant element. The shim toggles this
+   class onto the `.milkdown-code-block` whenever a canvas preview is
+   mounted. Mirrors `.price-chart-source-collapsed`. */
+.milkdown-wrapper .milkdown .canvas-source-collapsed {
+  --canvas-source-line-height: 20px;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block.canvas-source-collapsed {
+  margin-bottom: 4px;
+}
+
+.milkdown-wrapper .milkdown .canvas-source-collapsed .cm-line {
+  line-height: var(--canvas-source-line-height);
+}
+
+.milkdown-wrapper .milkdown .canvas-source-collapsed .cm-scroller {
+  max-height: calc(var(--canvas-source-line-height) * 2 + 16px);
+  overflow-y: auto;
+}
+
+/* Custom node shells */
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-node {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-node-group {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-text-view {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  overflow: auto;
+  cursor: text;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-text-view :first-child {
+  margin-top: 0;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-text-view :last-child {
+  margin-bottom: 0;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-text-edit {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  padding: 10px 12px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: none;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-file-header {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+/* Title sits on the left of the header; the open-in-new-tab icon on the
+   right. The flex layout keeps the title clipping responsibility on the
+   title itself so the icon stays pinned. Mirrored in the lightbox below. */
+.canvas-file-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.canvas-file-titlebar .canvas-file-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.canvas-file-open-external {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.canvas-file-open-external:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-file-title {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-file-broken {
+  color: var(--bad);
+  text-decoration: underline dotted;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-file-input,
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-link-input {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+
+/* Canvas markdown preview typography — self-contained styles so the
+   rendered HTML looks right both inline (where `.ProseMirror` styles
+   would otherwise cascade in) and inside the body-level lightbox
+   (where they would not). Keep these scoped to `.canvas-file-preview`
+   and `.canvas-text-view` so they don't bleed into other content. */
+.canvas-file-preview,
+.canvas-text-view {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.canvas-file-preview h1,
+.canvas-text-view h1 { font-size: 18px; font-weight: 700; margin: 0.5em 0 0.3em; }
+.canvas-file-preview h2,
+.canvas-text-view h2 { font-size: 16px; font-weight: 700; margin: 0.5em 0 0.3em; }
+.canvas-file-preview h3,
+.canvas-text-view h3 { font-size: 14px; font-weight: 700; margin: 0.5em 0 0.3em; }
+.canvas-file-preview h4,
+.canvas-file-preview h5,
+.canvas-file-preview h6,
+.canvas-text-view h4,
+.canvas-text-view h5,
+.canvas-text-view h6 { font-size: 13px; font-weight: 600; margin: 0.5em 0 0.3em; }
+
+.canvas-file-preview p,
+.canvas-text-view p { margin: 0.4em 0; }
+
+.canvas-file-preview ul,
+.canvas-file-preview ol,
+.canvas-text-view ul,
+.canvas-text-view ol { margin: 0.4em 0; padding-left: 1.4em; }
+.canvas-file-preview li,
+.canvas-text-view li { margin: 0.15em 0; }
+
+.canvas-file-preview a,
+.canvas-text-view a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.canvas-file-preview strong,
+.canvas-text-view strong { font-weight: 700; }
+.canvas-file-preview em,
+.canvas-text-view em { font-style: italic; }
+
+.canvas-file-preview code,
+.canvas-text-view code {
+  font-family: var(--crepe-font-code, ui-monospace, SFMono-Regular, monospace);
+  font-size: 0.92em;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.canvas-file-preview pre,
+.canvas-text-view pre {
+  margin: 0.5em 0;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  font-family: var(--crepe-font-code, ui-monospace, SFMono-Regular, monospace);
+  font-size: 0.92em;
+  overflow-x: auto;
+}
+.canvas-file-preview pre code,
+.canvas-text-view pre code {
+  padding: 0;
+  background: transparent;
+}
+
+.canvas-file-preview blockquote,
+.canvas-text-view blockquote {
+  margin: 0.5em 0;
+  padding: 2px 10px;
+  border-left: 3px solid color-mix(in srgb, var(--text) 25%, transparent);
+  color: var(--muted);
+}
+
+.canvas-file-preview hr,
+.canvas-text-view hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 0.6em 0;
+}
+
+.canvas-file-preview table,
+.canvas-text-view table {
+  border-collapse: collapse;
+  margin: 0.5em 0;
+  font-size: 12px;
+  width: 100%;
+}
+.canvas-file-preview th,
+.canvas-file-preview td,
+.canvas-text-view th,
+.canvas-text-view td {
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+.canvas-file-preview th,
+.canvas-text-view th {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  font-weight: 600;
+}
+
+.canvas-file-preview img,
+.canvas-text-view img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* File-node note picker. The dropdown floats below the input via a
+   `position: relative` wrapper. File nodes drop the outer
+   `overflow: hidden` so the dropdown can spill outside the node; the
+   internal `.canvas-file-body` keeps its own `overflow: auto` so the
+   preview stays contained. */
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-node-file,
+.canvas-lightbox-stage .canvas-node-file {
+  overflow: visible;
+}
+
+.canvas-file-picker {
+  position: relative;
+}
+
+.canvas-file-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  max-height: 220px;
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.canvas-file-suggestion {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.canvas-file-suggestion.is-active {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.canvas-file-suggestion-title {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.canvas-file-suggestion-id {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.canvas-file-suggestions-empty {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 6px 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-file-body {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--muted);
+  overflow: auto;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-file-preview {
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-file-loading,
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-file-broken-msg {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Image-mode file nodes: body becomes a flex container that fits the
+   image to the node's bounds while preserving aspect ratio. Works in
+   both the inline preview and the lightbox stage. */
+.canvas-file-body-image {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  overflow: hidden;
+}
+
+.canvas-file-image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.canvas-file-image[data-error="1"] {
+  /* When the URL fails to load, swap to a subtle broken-image hint. The
+     browser's default broken-image icon is enough; we just keep the
+     surrounding chrome intact. */
+  opacity: 0.4;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-link-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-link-icon {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-link-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-link-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-link-url {
+  font-size: 11px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-link-empty {
+  flex: 1;
+  padding: 10px 12px;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-group-label {
+  padding: 6px 10px;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-group-title {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-group-input {
+  width: 100%;
+  padding: 2px 4px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-resize-line {
+  border-color: var(--accent);
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-resize-handle {
+  background: var(--accent);
+  border-color: var(--bg);
+}
+
+/* React Flow palette overrides — match the app's theme tokens instead of
+   the library defaults so dark-mode looks correct. Variables come from
+   @xyflow/react/dist/style.css. */
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .react-flow {
+  /* `color` drives `currentColor` for the arrowhead markers (set in
+     convert.ts). Keep it in sync with `--xy-edge-stroke` below. */
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+  --xy-background-color-default: var(--bg);
+  --xy-background-pattern-color-default: color-mix(in srgb, var(--text) 10%, transparent);
+  --xy-edge-stroke: color-mix(in srgb, var(--text) 70%, transparent);
+  --xy-edge-stroke-default: color-mix(in srgb, var(--text) 70%, transparent);
+  --xy-edge-stroke-selected: var(--accent);
+  --xy-edge-stroke-selected-default: var(--accent);
+  --xy-connectionline-stroke-default: var(--accent);
+  --xy-controls-button-background-color-default: var(--bg);
+  --xy-controls-button-background-color-hover-default: color-mix(in srgb, var(--text) 8%, transparent);
+  --xy-controls-button-color-default: var(--text);
+  --xy-controls-button-border-color-default: var(--border);
+  --xy-minimap-background-color-default: var(--bg);
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .react-flow__edge.selected {
+  color: var(--accent);
+}
+
+/* --- YouTube preview --- Rendered by src/lib/youtube-render.ts from
+   `youtube` fenced code blocks. */
+.milkdown-wrapper .milkdown .ProseMirror .youtube-preview {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .youtube-preview .youtube-frame {
+  width: min(100%, 860px);
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .youtube-preview .youtube-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .youtube-preview .youtube-error {
+  color: var(--bad);
+  font-family: var(--crepe-font-code);
+  font-size: 12px;
+  white-space: pre-wrap;
+  padding: 4px 0;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .youtube-preview .youtube-empty {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* --- Bookmark preview --- Rendered from fenced `bookmark` blocks by src/lib/embed-blocks.ts. */
+.milkdown-wrapper .milkdown .ProseMirror .bookmark-preview {
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--border);
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 12%, transparent), transparent 34%),
+    var(--bg);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .bookmark-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(100%, 780px);
+  min-height: 76px;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 5%, transparent) inset,
+    0 14px 34px rgba(0, 0, 0, 0.14);
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .bookmark-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: color-mix(in srgb, var(--panel-2) 80%, transparent);
+  transform: translateY(-1px);
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .bookmark-icon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent-hover);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .bookmark-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .bookmark-title {
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .bookmark-url,
+.milkdown-wrapper .milkdown .ProseMirror .bookmark-description {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .bookmark-description {
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.milkdown-wrapper .milkdown .ProseMirror .rich-block-empty {
+  width: min(100%, 780px);
+  padding: 14px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 14px;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: italic;
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
+}
+
+/* --- Price chart preview --- Rendered from fenced `price-chart` blocks by src/lib/price-chart-plugin.ts. */
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-preview {
+  margin: 4px 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 29px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.02em;
+}
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-ohlc {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.price-chart-timeframes {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--panel) 75%, transparent);
+}
+.price-chart-timeframe {
+  min-width: 30px;
+  height: 20px;
+  border: 0;
+  padding: 0 6px;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 20px;
+  transition: background 120ms ease, color 120ms ease;
+}
+.price-chart-timeframe:hover {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  color: var(--text);
+}
+.price-chart-timeframe.is-active {
+  background: var(--text);
+  color: var(--bg);
+}
+.price-chart-expand {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  padding: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.price-chart-expand:hover {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  color: var(--text);
+}
+
+/* --- Price chart lightbox --- Lives in document.body so it's outside the
+   ProseMirror tree; classes here are intentionally unscoped. */
+.price-chart-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, .85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  outline: none;
+  padding: 24px;
+}
+.price-chart-lightbox-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, .7);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.price-chart-lightbox-close:hover { color: rgba(255, 255, 255, 1); }
+.price-chart-lightbox-inner {
+  width: min(95vw, 1600px);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+}
+.price-chart-lightbox-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 29px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.02em;
+}
+.price-chart-lightbox-header .price-chart-ohlc {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.price-chart-lightbox-container {
+  width: 100%;
+  overflow: hidden;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.price-chart-lightbox-container .tv-lightweight-charts,
+.price-chart-lightbox-container .tv-lightweight-charts * {
+  box-sizing: content-box;
+}
+.price-chart-lightbox-container table {
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: auto;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  min-width: 0;
+  overflow: visible;
+  font-size: inherit;
+  background: transparent;
+}
+.price-chart-lightbox-container th,
+.price-chart-lightbox-container td {
+  box-sizing: content-box;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  text-align: inherit;
+  vertical-align: inherit;
+  background: transparent;
+  font-weight: inherit;
+}
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-container {
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-container .tv-lightweight-charts,
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-container .tv-lightweight-charts * {
+  box-sizing: content-box;
+}
+/* Lightweight-charts builds its layout from a <table> with <tr>/<td> cells
+   (right-side price-axis cell, bottom time-axis cell). Milkdown's editor
+   styles on `.milkdown table` / `.milkdown td` would otherwise add borders,
+   padding, margins, and `border-collapse: collapse` to those cells, pushing
+   the axis canvases past their reserved bounds and clipping the price/date
+   labels. Reset all of it inside the chart container. */
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-container table {
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: auto;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  min-width: 0;
+  overflow: visible;
+  font-size: inherit;
+  background: transparent;
+}
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-container th,
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-container td {
+  box-sizing: content-box;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  text-align: inherit;
+  vertical-align: inherit;
+  background: transparent;
+  font-weight: inherit;
+}
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-empty,
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-error {
+  padding: 16px;
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+  color: var(--muted);
+}
+.milkdown-wrapper .milkdown .ProseMirror .price-chart-error {
+  color: var(--destructive, #ef4444);
+}
+
+/* --- Wikilinks --- Decoration-based inline styling over raw `[[target]]`
+   text in the source. Matched by src/lib/wikilink/wikilink-plugin.ts.
+
+   Interaction model: plain click places the caret (standard text editing).
+   ⌘ (mac) / Ctrl-click navigates. Cursor is `text` by default so the
+   link reads as editable text; the hover tooltip below communicates the
+   navigation shortcut. Same keyboard shortcut also works from the caret
+   via ⌘/Ctrl+Enter. */
+.milkdown-wrapper .milkdown .ProseMirror .wikilink {
+  color: var(--accent);
+  border-radius: 3px;
+  padding: 0 1px;
+  cursor: text;
+  position: relative;
+  transition: background 120ms ease, color 120ms ease;
+  text-decoration: none;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.milkdown-wrapper .milkdown .ProseMirror .wikilink:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent-hover);
+}
+.milkdown-wrapper .milkdown .ProseMirror .wikilink.broken {
+  color: var(--bad);
+  background: color-mix(in srgb, var(--bad) 8%, transparent);
+  text-decoration: underline dashed;
+  text-underline-offset: 2px;
+}
+.milkdown-wrapper .milkdown .ProseMirror .wikilink.broken:hover {
+  background: color-mix(in srgb, var(--bad) 14%, transparent);
+}
+.milkdown-wrapper .milkdown .ProseMirror .wikilink.wikilink-transclude {
+  display: inline-block;
+  font-family: var(--crepe-font-code);
+  font-size: 0.85em;
+  padding: 0 4px;
+  background: var(--panel-2);
+  color: var(--muted);
+  border: 1px dashed var(--border);
+}
+/* Hover tooltip — "⌘-click to open" / "Ctrl-click to open". Delayed
+   animation so it doesn't flash while the mouse sweeps across text. */
+.milkdown-wrapper .milkdown .ProseMirror .wikilink::after {
+  content: attr(data-wikilink-hint);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 7px;
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 100ms ease 500ms, visibility 0s linear 600ms;
+  z-index: 30;
+}
+.milkdown-wrapper .milkdown .ProseMirror .wikilink:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 100ms ease 500ms, visibility 0s linear 500ms;
+}
+
+/* --- Backlinks panel --- stacked above History panel in the right sidebar. */
+.backlinks-row {
+  display: block;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.backlinks-row:hover {
+  background: var(--panel-2);
+}
+.backlinks-row .backlinks-title {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.backlinks-row .backlinks-context {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.backlinks-row .backlinks-context mark {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--text);
+  padding: 0 1px;
+  border-radius: 2px;
+}
+
+/* --- Unlinked mentions --- */
+.unlinked-row {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.unlinked-row .unlinked-context {
+  flex: 1;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  min-width: 0;
+}
+.unlinked-row .unlinked-context mark {
+  background: color-mix(in srgb, var(--warn) 22%, transparent);
+  color: var(--text);
+  padding: 0 1px;
+  border-radius: 2px;
+}
+.unlinked-row .unlinked-link-btn {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  font-size: 10px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: opacity 120ms ease, transform 80ms ease;
+}
+.unlinked-row .unlinked-link-btn:hover {
+  opacity: 0.9;
+}
+.unlinked-row .unlinked-link-btn:active {
+  transform: scale(0.97);
+}
+
+/* --- Wikilink autocomplete popup ---
+   Raycast / Linear–style command palette: rounded corners, soft layered
+   shadow, icon column, keyboard-hint footer. */
+.wikilink-autocomplete {
+  /* Mounted to <body> and positioned in viewport coords by the plugin so
+     the popup never disturbs the editor's scroll container. */
+  position: fixed;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  max-width: 380px;
+  max-height: 320px;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 0 color-mix(in srgb, white 6%, transparent) inset,
+    0 12px 32px -8px rgba(0, 0, 0, 0.28),
+    0 4px 12px -4px rgba(0, 0, 0, 0.18);
+  animation: wikilink-ac-pop 120ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: top left;
+}
+.wikilink-autocomplete[data-flipped="1"] {
+  transform-origin: bottom left;
+  animation-name: wikilink-ac-pop-up;
+}
+@keyframes wikilink-ac-pop-up {
+  from { opacity: 0; transform: translateY(3px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+:root[data-theme="light"] .wikilink-autocomplete {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 10px 28px -10px rgba(15, 23, 42, 0.22),
+    0 4px 10px -4px rgba(15, 23, 42, 0.10);
+}
+@keyframes wikilink-ac-pop {
+  from { opacity: 0; transform: translateY(-3px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.wikilink-autocomplete .wikilink-ac-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px;
+  scrollbar-width: thin;
+}
+.wikilink-autocomplete .wikilink-ac-list::-webkit-scrollbar {
+  width: 8px;
+}
+.wikilink-autocomplete .wikilink-ac-list::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted) 30%, transparent);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.wikilink-autocomplete-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text);
+  line-height: 1.25;
+  position: relative;
+  transition: background 60ms ease, color 60ms ease;
+}
+.wikilink-autocomplete-item + .wikilink-autocomplete-item {
+  margin-top: 1px;
+}
+.wikilink-autocomplete-item .wikilink-ac-icon {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--panel-2) 70%, transparent);
+  border-radius: 5px;
+  transition: background 60ms ease, color 60ms ease;
+}
+.wikilink-autocomplete-item .wikilink-ac-icon svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+.wikilink-autocomplete-item .wikilink-ac-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.wikilink-autocomplete-item .wikilink-ac-title {
+  display: block;
+  color: var(--text);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+.wikilink-autocomplete-item .wikilink-ac-path {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+.wikilink-autocomplete-item .wikilink-ac-rowhint {
+  flex: 0 0 auto;
+  opacity: 0;
+  transition: opacity 80ms ease;
+}
+.wikilink-autocomplete-item.selected .wikilink-ac-rowhint {
+  opacity: 1;
+}
+/* Only `.selected` highlights — hover is wired in JS to set selectedIdx,
+   keeping a single source of truth so keyboard + mouse never fight over
+   which row looks "active." */
+.wikilink-autocomplete-item.selected {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.wikilink-autocomplete-item.selected .wikilink-ac-icon {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent);
+}
+.wikilink-autocomplete-item.create-new .wikilink-ac-title {
+  color: var(--accent);
+  font-weight: 500;
+  font-style: normal;
+}
+.wikilink-autocomplete-item.create-new .wikilink-ac-icon {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.wikilink-autocomplete-item.create-new.selected .wikilink-ac-icon {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.wikilink-autocomplete .wikilink-ac-divider {
+  height: 1px;
+  margin: 6px 4px;
+  background: color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+.wikilink-autocomplete .wikilink-ac-empty {
+  padding: 16px 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.wikilink-autocomplete .wikilink-ac-footer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  background: color-mix(in srgb, var(--panel-2) 50%, transparent);
+  font-size: 10.5px;
+  color: var(--muted);
+  user-select: none;
+}
+.wikilink-autocomplete .wikilink-ac-footer span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.wikilink-autocomplete kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--panel-2) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 0 color-mix(in srgb, var(--border) 70%, transparent);
+}
+.wikilink-autocomplete-item.selected kbd {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* --- Transclusion embedded block --- */
+.transclusion-embed {
+  display: block;
+  margin: 10px 0;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  background: var(--panel-2);
+}
+.transclusion-embed .transclusion-header {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.transclusion-embed .transclusion-header a {
+  color: var(--accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+.transclusion-embed .transclusion-header a:hover {
+  text-decoration: underline;
+}
+.transclusion-embed .transclusion-content {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.transclusion-embed .transclusion-missing {
+  color: var(--bad);
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* --- Graph view modal --- */
+.graph-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+}
+.graph-toolbar {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.graph-toolbar h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.graph-canvas-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.graph-canvas-wrap svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+.graph-canvas-wrap svg:active {
+  cursor: grabbing;
+}
+.graph-node {
+  fill: var(--accent);
+  stroke: var(--bg);
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: fill 120ms ease, r 120ms ease;
+}
+.graph-node:hover {
+  fill: var(--accent-hover);
+}
+.graph-node.isolated {
+  fill: var(--muted);
+  opacity: 0.55;
+}
+.graph-node.active {
+  fill: var(--warn);
+  opacity: 1;
+}
+.graph-edge {
+  stroke: var(--border-strong);
+  stroke-opacity: 0.7;
+  stroke-width: 1;
+}
+.graph-edge.transclude {
+  stroke-dasharray: 3 2;
+}
+.graph-label {
+  fill: var(--text);
+  font-size: 10px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- Reindex icon button (sidebar footer) ---
+   Shares the `pager-btn` base style with ThemeToggle (panel-2 fill, 1px
+   border, 6px radius). This layer only adds the progress ring that appears
+   while indexing is in flight — a conic-gradient donut painted behind the
+   SVG icon, driven by the --reindex-pct CSS var set inline by React. */
+.reindex-icon-btn--progress {
+  color: var(--accent);
+}
+/* Using aria-disabled rather than the disabled attribute so the tooltip
+   keeps firing on hover — click is gated in JS. */
+.reindex-icon-btn--disabled {
+  cursor: default;
+}
+.reindex-icon-btn--disabled:hover {
+  background: var(--panel-2); /* no darken on hover when disarmed */
+}
+/* Progress ring — circle behind the icon. The radial mask carves out the
+   center so the icon stays readable through the donut. */
+.reindex-icon-btn::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    color-mix(in srgb, var(--accent) 60%, transparent) var(--reindex-pct, 0%),
+    color-mix(in srgb, var(--muted) 20%, transparent) var(--reindex-pct, 0%)
+  );
+  -webkit-mask: radial-gradient(circle, transparent 7px, #000 7.5px);
+          mask: radial-gradient(circle, transparent 7px, #000 7.5px);
+  opacity: 0;
+  transition: opacity 140ms ease;
+  pointer-events: none;
+}
+.reindex-icon-btn--progress::before {
+  opacity: 1;
+}
+.reindex-icon-btn svg {
+  position: relative;
+  z-index: 1;
+}
+.reindex-icon-btn .reindex-spin {
+  animation: reindex-spin 900ms linear infinite;
+  transform-origin: center;
+}
+@keyframes reindex-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* react-day-picker overrides — applied via the .rdp-app-themed wrapper that
+ * `CalendarPopover` puts on its container. We map the library's CSS vars to
+ * our app vars so the calendar inherits theme + accent in both light and
+ * dark mode without forking the library stylesheet. */
+.rdp-app-themed .rdp-root {
+  --rdp-accent-color: var(--accent);
+  --rdp-accent-background-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  --rdp-background-color: var(--panel);
+  --rdp-today-color: var(--accent);
+  --rdp-disabled-opacity: 0.4;
+  --rdp-outside-opacity: 0.45;
+  --rdp-weekday-text-color: var(--muted);
+  --rdp-day-height: 32px;
+  --rdp-day-width: 32px;
+  --rdp-day_button-height: 30px;
+  --rdp-day_button-width: 30px;
+  --rdp-day_button-border-radius: 6px;
+  --rdp-selected-border: 1.5px solid var(--accent);
+  --rdp-range_middle-background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+  --rdp-nav_button-height: 28px;
+  --rdp-nav_button-width: 28px;
+  font-size: 12px;
+  color: var(--text);
+}
+.rdp-app-themed .rdp-month_caption {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 13px;
+}
+.rdp-app-themed .rdp-day:hover .rdp-day_button:not([disabled]) {
+  background: var(--panel-2);
+}
+.rdp-app-themed .rdp-button_previous,
+.rdp-app-themed .rdp-button_next {
+  color: var(--muted);
+  border-radius: 6px;
+}
+.rdp-app-themed .rdp-button_previous:hover,
+.rdp-app-themed .rdp-button_next:hover {
+  background: var(--panel-2);
+  color: var(--text);
+}
+
+/* --- Canvas lightbox --- Mounted in document.body by canvas-render.ts when
+   the user clicks the canvas's expand button. Classes are intentionally
+   unscoped because the overlay lives outside the editor tree. */
+.canvas-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  outline: none;
+  padding: 24px;
+}
+
+.canvas-lightbox-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.canvas-lightbox-close:hover { color: rgba(255, 255, 255, 1); }
+
+.canvas-lightbox-inner {
+  width: min(95vw, 1600px);
+  height: min(90vh, 1000px);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas-lightbox-stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.canvas-lightbox-stage .canvas-toolbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.canvas-lightbox-stage .canvas-toolbar button:not(.canvas-color-swatch) {
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  background: transparent;
+  color: var(--text);
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.canvas-lightbox-stage .canvas-toolbar button:not(.canvas-color-swatch):hover {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.canvas-lightbox-stage .canvas-toolbar .canvas-toolbar-delete {
+  color: var(--bad);
+}
+
+.canvas-lightbox-stage .canvas-node {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas-lightbox-stage .canvas-node-group {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.canvas-lightbox-stage .canvas-text-view,
+.canvas-lightbox-stage .canvas-text-edit {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  overflow: auto;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+}
+
+.canvas-lightbox-stage .canvas-text-edit { resize: none; width: 100%; height: 100%; }
+
+.canvas-lightbox-stage .canvas-file-header {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+.canvas-lightbox-stage .canvas-file-title {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.canvas-lightbox-stage .canvas-file-broken {
+  color: var(--bad);
+  text-decoration: underline dotted;
+}
+
+.canvas-lightbox-stage .canvas-file-input,
+.canvas-lightbox-stage .canvas-link-input,
+.canvas-lightbox-stage .canvas-group-input {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+
+.canvas-lightbox-stage .canvas-file-body {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--muted);
+  overflow: auto;
+}
+
+.canvas-lightbox-stage .canvas-file-preview {
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.canvas-lightbox-stage .canvas-file-loading,
+.canvas-lightbox-stage .canvas-file-broken-msg {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.canvas-lightbox-stage .canvas-link-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.canvas-lightbox-stage .canvas-link-icon {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.canvas-lightbox-stage .canvas-link-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.canvas-lightbox-stage .canvas-link-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.canvas-lightbox-stage .canvas-link-url {
+  font-size: 11px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.canvas-lightbox-stage .canvas-link-empty {
+  flex: 1;
+  padding: 10px 12px;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.canvas-lightbox-stage .canvas-group-label {
+  padding: 6px 10px;
+}
+
+.canvas-lightbox-stage .canvas-group-title {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.canvas-lightbox-stage .react-flow {
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+  --xy-background-color-default: var(--bg);
+  --xy-background-pattern-color-default: color-mix(in srgb, var(--text) 10%, transparent);
+  --xy-edge-stroke: color-mix(in srgb, var(--text) 70%, transparent);
+  --xy-edge-stroke-default: color-mix(in srgb, var(--text) 70%, transparent);
+  --xy-edge-stroke-selected: var(--accent);
+  --xy-edge-stroke-selected-default: var(--accent);
+  --xy-connectionline-stroke-default: var(--accent);
+  --xy-controls-button-background-color-default: var(--bg);
+  --xy-controls-button-background-color-hover-default: color-mix(in srgb, var(--text) 8%, transparent);
+  --xy-controls-button-color-default: var(--text);
+  --xy-controls-button-border-color-default: var(--border);
+  --xy-minimap-background-color-default: var(--bg);
+}
+
+.canvas-lightbox-stage .react-flow__edge.selected {
+  color: var(--accent);
+}
+
+/* --- Canvas node colors --- Apply to any `.canvas-node[data-canvas-color=…]`
+   regardless of where it's mounted (inline preview or body-level lightbox).
+   Group nodes additionally pick up a faint background tint. Selectors are
+   intentionally unscoped so both contexts share one source of truth. */
+.canvas-node[data-canvas-color="1"] { --canvas-node-color: var(--canvas-color-1); }
+.canvas-node[data-canvas-color="2"] { --canvas-node-color: var(--canvas-color-2); }
+.canvas-node[data-canvas-color="3"] { --canvas-node-color: var(--canvas-color-3); }
+.canvas-node[data-canvas-color="4"] { --canvas-node-color: var(--canvas-color-4); }
+.canvas-node[data-canvas-color="5"] { --canvas-node-color: var(--canvas-color-5); }
+.canvas-node[data-canvas-color="6"] { --canvas-node-color: var(--canvas-color-6); }
+
+/* Border/box-shadow assignment must match the specificity of the scoped
+   `.canvas-node` base rules (both inline and lightbox), otherwise the
+   default `border-color: var(--border)` wins and the color is invisible. */
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-node[data-canvas-color],
+.canvas-lightbox-stage .canvas-node[data-canvas-color] {
+  border-color: var(--canvas-node-color);
+  box-shadow: 0 0 0 1px var(--canvas-node-color);
+}
+
+.milkdown-wrapper .milkdown .milkdown-code-block .canvas-preview .canvas-node-group[data-canvas-color],
+.canvas-lightbox-stage .canvas-node-group[data-canvas-color] {
+  background: color-mix(in srgb, var(--canvas-node-color) 10%, transparent);
+  border-color: var(--canvas-node-color);
+  box-shadow: none;
+}
+
+/* Color swatches in the toolbar. The selectors mirror the same data-attr
+   convention so the swatch shows the actual node color. */
+.canvas-toolbar-colors {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 6px;
+  padding-left: 6px;
+  border-left: 1px solid var(--border);
+}
+
+.canvas-color-swatch {
+  /* Size and shape — fixed so flex containers don't shrink the dots away. */
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
+  cursor: pointer;
+  padding: 0;
+  background: var(--bg);
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas-color-swatch:hover {
+  border-color: var(--text);
+}
+
+/* Direct backgrounds for preset swatches. The earlier variable-indirection
+   approach (`--canvas-node-color: var(--canvas-color-1)` then
+   `background: var(--canvas-node-color, ...)`) was fragile and rendered as
+   the toolbar's own bg in some setups — making the preset dots invisible
+   while the rainbow / × swatches (which set background directly) stayed
+   visible. Direct backgrounds eliminate that whole class of failure. */
+.canvas-color-swatch[data-canvas-color="1"] { background: var(--canvas-color-1); }
+.canvas-color-swatch[data-canvas-color="2"] { background: var(--canvas-color-2); }
+.canvas-color-swatch[data-canvas-color="3"] { background: var(--canvas-color-3); }
+.canvas-color-swatch[data-canvas-color="4"] { background: var(--canvas-color-4); }
+.canvas-color-swatch[data-canvas-color="5"] { background: var(--canvas-color-5); }
+.canvas-color-swatch[data-canvas-color="6"] { background: var(--canvas-color-6); }
+
+.canvas-color-swatch.canvas-color-clear {
+  background: transparent;
+  color: var(--muted);
+}
+
+/* Custom-color trigger: rainbow conic gradient. Reads as "wheel". */
+.canvas-color-swatch.canvas-color-wheel {
+  background: conic-gradient(
+    from 0deg,
+    hsl(0, 75%, 55%),
+    hsl(60, 75%, 55%),
+    hsl(120, 75%, 55%),
+    hsl(180, 75%, 55%),
+    hsl(240, 75%, 55%),
+    hsl(300, 75%, 55%),
+    hsl(360, 75%, 55%)
+  );
+}
+
+/* Native <input type="color"> is unstylable in any consistent way across
+   browsers, so we visually hide it and use the wheel button above to
+   trigger `.click()` on it. The input stays in the DOM (rather than being
+   `display: none`) so its `.click()` opens the OS color picker. */
+.canvas-color-input-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}

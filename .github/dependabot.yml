@@ -1,0 +1,34 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      # The editor stack, the AI SDKs, and the type/test tooling each move
+      # together; grouping keeps one PR per stack instead of one per package.
+      milkdown:
+        patterns: ["@milkdown/*"]
+      ai-sdk:
+        patterns: ["@ai-sdk/*", "ai"]
+      types:
+        patterns: ["@types/*"]
+      testing:
+        patterns: ["vitest", "@vitest/*", "@testing-library/*", "jsdom"]
+    ignore:
+      # Next 15 is a deliberate migration, not a dependency bump.
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint-config-next"
+        update-types: ["version-update:semver-major"]
+      # React 19 likewise — Milkdown and Excalidraw need checking first.
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly

@@ -1,0 +1,78 @@
+name: Bug report
+description: Something in Note doesn't work the way it should
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Since your vault is plain markdown files, a small
+        `.md` file that reproduces the problem is the most useful thing you can
+        attach.
+
+        **Found a security problem?** Don't file it here — see
+        [SECURITY.md](../blob/main/SECURITY.md) for private reporting.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what did you get instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open a vault containing…
+        2. Type…
+        3. Observe…
+    validations:
+      required: true
+
+  - type: textarea
+    id: sample
+    attributes:
+      label: Sample markdown
+      description: >
+        If the bug involves note content — wikilinks, transclusion, diagrams,
+        frontmatter, tasks — paste the smallest `.md` file that triggers it.
+      render: markdown
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: Chrome 151 / Edge 151 / Arc 1.6
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: macOS 15.2 / Windows 11 / Ubuntu 24.04
+    validations:
+      required: true
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Console errors
+      description: Anything red in the browser devtools console.
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I'm using a Chromium-based browser (Note requires the File System Access API)
+          required: true
+        - label: I searched existing issues for this problem
+          required: true

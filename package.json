@@ -1,0 +1,100 @@
+{
+  "name": "note",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A local-first markdown notebook that runs in your browser, writes plain .md files to a folder you choose, and brings your own AI key.",
+  "license": "MIT",
+  "author": "Phat Huynh",
+  "homepage": "https://github.com/heyphat/note#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heyphat/note.git"
+  },
+  "bugs": {
+    "url": "https://github.com/heyphat/note/issues"
+  },
+  "keywords": [
+    "markdown",
+    "notes",
+    "note-taking",
+    "local-first",
+    "wysiwyg",
+    "editor",
+    "milkdown",
+    "file-system-access-api",
+    "wikilinks",
+    "zettelkasten",
+    "pkm",
+    "nextjs"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "conform:tasknotes": "vitest run src/lib/tasks/conformance-adapter.test.ts",
+    "build:docs": "node scripts/build-docs-bundle.mjs",
+    "predev": "node scripts/build-docs-bundle.mjs",
+    "prebuild": "node scripts/build-docs-bundle.mjs"
+  },
+  "dependencies": {
+    "@ai-sdk/amazon-bedrock": "^3.0.0",
+    "@ai-sdk/anthropic": "^3.0.71",
+    "@ai-sdk/google": "^3.0.64",
+    "@ai-sdk/google-vertex": "^3.0.0",
+    "@ai-sdk/openai": "^3.0.53",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@excalidraw/excalidraw": "^0.18.0",
+    "@milkdown/crepe": "^7.20.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@types/markdown-it": "^14.1.2",
+    "@types/markdown-it-footnote": "^3.0.4",
+    "@xyflow/react": "^12.10.2",
+    "ai": "^6.0.168",
+    "diff": "^9.0.0",
+    "google-auth-library": "^10.0.0",
+    "lightweight-charts": "5.2.0",
+    "markdown-it": "^14.1.1",
+    "markdown-it-footnote": "^4.0.0",
+    "mermaid": "^11.14.0",
+    "minisearch": "^7.2.0",
+    "next": "14.2.35",
+    "next-intl": "^4.9.1",
+    "pdfjs-dist": "^5.6.205",
+    "react": "^18",
+    "react-day-picker": "^9.14.0",
+    "react-dom": "^18",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "rrule": "^2.8.1",
+    "yaml": "^2.8.4"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@vitest/ui": "^3.2.4",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.35",
+    "jsdom": "^26.1.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "^6.0.0"
+    }
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}
