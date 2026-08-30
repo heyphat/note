@@ -1,0 +1,41 @@
+# Code owners for Note.
+#
+# Every rule assigns @heyphat, who reviews everything today. The paths are
+# listed separately anyway: they mark the surfaces where a change can quietly
+# break one of the design commitments in CONTRIBUTING.md, so a review there is
+# checking something specific rather than just reading a diff.
+#
+# Last match wins — the most specific rule for a file is the one that applies.
+
+# Default owner for anything not matched below.
+*                           @heyphat
+
+# --- Design commitments -----------------------------------------------------
+
+# "Lean dependencies": every addition lands in someone's bundle.
+/package.json               @heyphat
+/package-lock.json          @heyphat
+
+# "No server" / "no telemetry": build, runtime and edge config are where a
+# backend or a phone-home would have to be wired in.
+/next.config.mjs            @heyphat
+/Dockerfile                 @heyphat
+/src/middleware.ts          @heyphat
+
+# "Bring your own key": provider calls must keep going browser -> provider,
+# with nothing proxying them by default.
+/src/lib/ai/                @heyphat
+
+# --- Supply chain and process ----------------------------------------------
+
+# CI defines the required status checks on main; changing a job name silently
+# changes what protection enforces.
+/.github/workflows/         @heyphat
+/.github/dependabot.yml     @heyphat
+/.github/CODEOWNERS         @heyphat
+
+# Security policy and the promises made to users about it.
+/SECURITY.md                @heyphat
+/LICENSE                    @heyphat
+/CODE_OF_CONDUCT.md         @heyphat
+/CONTRIBUTING.md            @heyphat
