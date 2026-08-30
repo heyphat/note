@@ -87,10 +87,10 @@ describe('extractBedrockKeyRegion', () => {
 
   it('handles the real-world short-term key shape from the Bedrock console', () => {
     // The shape the Bedrock console emits: a presigned URL carrying the
-    // credential scope, expiry, and signed headers. The key ID below is AWS's
-    // documented example value — a real one would identify the account it was
-    // minted in, so don't paste one here.
-    const url = 'bedrock.amazonaws.com/?Action=CallWithBearerToken&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAIOSFODNN7EXAMPLE%2F20260430%2Fap-northeast-2%2Fbedrock%2Faws4_request&X-Amz-Date=20260430T004719Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&Version=1';
+    // credential scope, expiry, and signed headers. Only the region segment is
+    // parsed, so the key ID is a plain placeholder — deliberately not AWS's
+    // ASIA…EXAMPLE value, which secret scanners flag on sight.
+    const url = 'bedrock.amazonaws.com/?Action=CallWithBearerToken&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=EXAMPLEACCESSKEYID%2F20260430%2Fap-northeast-2%2Fbedrock%2Faws4_request&X-Amz-Date=20260430T004719Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&Version=1';
     const key = `bedrock-api-key-${Buffer.from(url, 'utf-8').toString('base64')}`;
     expect(extractBedrockKeyRegion(key)).toBe('ap-northeast-2');
   });
