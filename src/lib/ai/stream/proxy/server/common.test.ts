@@ -1,18 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import type { StreamTextResult } from 'ai';
+
 import {
   proxyStreamResponse,
+  type EditStreamResult,
   buildMcpToolSdkRecord,
-  EDIT_TOOLS,
 } from './common';
 
 // Build a minimal StreamTextResult-shaped fake whose fullStream emits the
 // given parts. The proxy only consumes `fullStream`, so the rest of the
 // surface is irrelevant.
-function fakeStreamResult(parts: Array<Record<string, unknown>>): StreamTextResult<typeof EDIT_TOOLS, never> {
+function fakeStreamResult(parts: Array<Record<string, unknown>>): EditStreamResult {
   return {
     fullStream: (async function* () { for (const p of parts) yield p; })(),
-  } as unknown as StreamTextResult<typeof EDIT_TOOLS, never>;
+  } as unknown as EditStreamResult;
 }
 
 async function readSseEvents(response: Response): Promise<Array<{ event: string; data: unknown }>> {
