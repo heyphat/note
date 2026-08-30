@@ -4,18 +4,14 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 2
     groups:
-      # The editor stack, the AI SDKs, and the type/test tooling each move
-      # together; grouping keeps one PR per stack instead of one per package.
-      milkdown:
-        patterns: ["@milkdown/*"]
-      ai-sdk:
-        patterns: ["@ai-sdk/*", "ai"]
-      types:
-        patterns: ["@types/*"]
-      testing:
-        patterns: ["vitest", "@vitest/*", "@testing-library/*", "jsdom"]
+      # One PR for every npm update. Each PR costs a full CI matrix plus a
+      # Vercel preview build, and the per-stack grouping this replaced still
+      # produced five of them a week. Security fixes land together or not at
+      # all, so batching them costs nothing in exposure.
+      npm:
+        patterns: ["*"]
     ignore:
       # Next 15 is a deliberate migration, not a dependency bump.
       - dependency-name: "next"
@@ -32,3 +28,6 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
+    groups:
+      github-actions:
+        patterns: ["*"]
