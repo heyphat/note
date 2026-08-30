@@ -18,7 +18,9 @@ updates:
         patterns: ["*"]
         update-types: ["minor", "patch"]
     ignore:
-      # Next 15 is a deliberate migration, not a dependency bump.
+      # Next 16 is a deliberate migration, not a dependency bump. (15 landed
+      # in the Next 15 upgrade; Dependabot security updates bypass this
+      # ignore anyway when a major is the only fix for an advisory.)
       - dependency-name: "next"
         update-types: ["version-update:semver-major"]
       - dependency-name: "eslint-config-next"

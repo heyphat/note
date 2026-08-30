@@ -69,7 +69,7 @@ Things Note deliberately does *not* do today: ship a mobile app, host a sync ser
 
 ## How it works (architecture in five bullets)
 
-- Next.js 14 App Router serves the static UI. There is no backend; the host only delivers HTML, JS, and CSS.
+- Next.js 15 App Router serves the static UI. There is no backend; the host only delivers HTML, JS, and CSS.
 - Storage is the **File System Access API**: when you open a vault, the browser hands the app a `FileSystemDirectoryHandle` for the folder you picked, and reads/writes happen against that handle. The app remembers the handle across sessions via IndexedDB so you don't repick every time.
 - A `NoteStore` interface (`src/lib/storage/types.ts`) abstracts the file operations the rest of the app needs. The only implementation today is `BrowserFsStore`.
 - State is plain React hooks; UI prefs are persisted to `localStorage`, notes themselves to the vault folder.
