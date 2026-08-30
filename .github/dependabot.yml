@@ -4,14 +4,19 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 2
+    open-pull-requests-limit: 3
     groups:
-      # One PR for every npm update. Each PR costs a full CI matrix plus a
-      # Vercel preview build, and the per-stack grouping this replaced still
-      # produced five of them a week. Security fixes land together or not at
-      # all, so batching them costs nothing in exposure.
+      # One PR for all routine npm updates. Each PR costs a full CI matrix
+      # plus a Vercel preview build, and the per-stack grouping this replaced
+      # still produced five of them a week.
+      #
+      # Majors stay out of the group and arrive as their own PRs. Grouping
+      # them produced an unmergeable batch: eslint 10 cannot resolve against
+      # the eslint-config-next 14 pinned by the Next major ignore below, and
+      # tailwindcss 4 and typescript 7 are migrations rather than bumps.
       npm:
         patterns: ["*"]
+        update-types: ["minor", "patch"]
     ignore:
       # Next 15 is a deliberate migration, not a dependency bump.
       - dependency-name: "next"
