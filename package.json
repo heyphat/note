@@ -56,7 +56,7 @@
     "@xyflow/react": "^12.11.5",
     "ai": "^7.0.83",
     "diff": "^9.0.0",
-    "google-auth-library": "^10.0.0",
+    "google-auth-library": "^11.0.2",
     "lightweight-charts": "5.2.1",
     "markdown-it": "^15.0.0",
     "markdown-it-footnote": "^4.0.0",
