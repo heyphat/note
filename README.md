@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/heyphat/note/actions/workflows/ci.yml/badge.svg)](https://github.com/heyphat/note/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Node](https://img.shields.io/badge/node-%3E%3D18.17-brightgreen.svg)](package.json)
+[![Node](https://img.shields.io/badge/node-%3E%3D22-brightgreen.svg)](package.json)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 A local-first markdown notebook that runs entirely in your browser, writes plain `.md` files to a folder you choose, and brings AI to your notes without sending them through anyone's server.
@@ -77,7 +77,7 @@ Things Note deliberately does *not* do today: ship a mobile app, host a sync ser
 
 ## Getting started
 
-**Requirements:** Node.js >= 18.17 (`.nvmrc` pins 24, the version CI builds against) and a Chromium-based browser — the vault relies on the [File System Access API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API#browser_compatibility), which Firefox and Safari do not implement.
+**Requirements:** Node.js >= 22 (`.nvmrc` pins 24, the version CI builds against) and a Chromium-based browser — the vault relies on the [File System Access API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API#browser_compatibility), which Firefox and Safari do not implement.
 
 ```bash
 npm install
