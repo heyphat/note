@@ -13,7 +13,7 @@
 // internal chunk shape.
 
 import type { NextRequest } from 'next/server';
-import { tool, jsonSchema, type ModelMessage, type StreamTextResult } from 'ai';
+import { tool, jsonSchema, type ModelMessage, type streamText } from 'ai';
 import type { ProviderOptions } from '@ai-sdk/provider-utils';
 import { EDIT_TOOLS } from '../../../tools';
 import type { Role } from '../../../index';
@@ -285,10 +285,15 @@ function base64ToBytes(b64: string): Uint8Array {
   return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength);
 }
 
+// `streamText`'s generics gained a runtime-context parameter in ai v7. Deriving
+// the result type from the function itself keeps this file off that moving
+// surface — the proxy only ever reads `fullStream`.
+export type EditStreamResult = ReturnType<typeof streamText<typeof EDIT_TOOLS>>;
+
 // --- SSE response builder ---
 
 interface ProxyStreamArgs {
-  result: StreamTextResult<typeof EDIT_TOOLS, never>;
+  result: EditStreamResult;
   providerLabel: string;
 }
 
