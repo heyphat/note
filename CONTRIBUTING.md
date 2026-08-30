@@ -31,7 +31,7 @@ they're rejected because they'd make this a different project.
 
 ## Getting set up
 
-**Requirements:** Node.js >= 18.17 (`.nvmrc` pins 24) and a Chromium-based
+**Requirements:** Node.js >= 22 (`.nvmrc` pins 24) and a Chromium-based
 browser. Firefox and Safari do not implement the
 [File System Access API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API#browser_compatibility),
 which is how the vault works, so the app cannot run there.
@@ -102,7 +102,7 @@ Two things that surprise people:
    npm run typecheck && npm run lint && npm test
    ```
 
-   CI runs all three plus a production build, on Node 18 and 24. Lint currently
+   CI runs all three plus a production build, on Node 22 and 24. Lint currently
    emits some pre-existing `react-hooks/exhaustive-deps` warnings; please don't
    add new ones, and don't silence existing ones with a blanket disable.
 
