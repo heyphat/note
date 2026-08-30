@@ -2,8 +2,11 @@ import { defineConfig } from 'vitest/config';
 import path from 'node:path';
 
 export default defineConfig({
-  esbuild: {
-    jsx: 'automatic',
+  // Vite 8 (bundled with vitest 4) transforms with Oxc rather than esbuild,
+  // so the automatic JSX runtime moved off `esbuild.jsx`. tsconfig keeps
+  // "jsx": "preserve" for Next, so tests still need it set explicitly.
+  oxc: {
+    jsx: { runtime: 'automatic' },
   },
   test: {
     environment: 'jsdom',
